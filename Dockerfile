@@ -21,10 +21,12 @@ RUN npm install
 
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
+COPY --from=builder /app/db ./db
+COPY --from=builder /app/drizzle.config.json ./drizzle.config.json
 
 ENV NODE_ENV=production
 ENV PORT=3000
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD npm run db:migrate && npm start
