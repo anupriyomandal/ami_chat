@@ -18,6 +18,7 @@ RUN apk add --no-cache python3 make g++
 
 COPY package.json package-lock.json ./
 RUN npm install
+RUN node node_modules/@node-rs/argon2/install.js || true
 
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
