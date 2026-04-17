@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+export const dynamic = "force-dynamic";
 import { requireAdmin } from "@/lib/auth-guard";
 import { db } from "@/db";
 import { users } from "@/db/schema";

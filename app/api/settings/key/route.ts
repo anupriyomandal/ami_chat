@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+export const dynamic = "force-dynamic";
 import { requireUser } from "@/lib/auth-guard";
 import { db } from "@/db";
 import { eq } from "drizzle-orm";
