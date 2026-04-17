@@ -17,7 +17,7 @@ WORKDIR /app
 RUN apk add --no-cache python3 make g++
 
 COPY package.json package-lock.json ./
-RUN npm ci --omit=dev
+RUN npm install
 
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
