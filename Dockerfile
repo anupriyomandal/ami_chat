@@ -24,6 +24,7 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/db ./db
 
 ENV NODE_ENV=production
+ENV PORT=3000
 
 EXPOSE 3000
 
