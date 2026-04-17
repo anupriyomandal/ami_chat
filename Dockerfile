@@ -17,7 +17,7 @@ WORKDIR /app
 RUN apk add --no-cache python3 make g++
 
 COPY package.json package-lock.json ./
-RUN npm ci --omit=dev
+RUN npm ci
 
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
@@ -28,4 +28,4 @@ ENV PORT=3000
 
 EXPOSE 3000
 
-CMD ["sh", "-c", "npm run db:migrate && npm start"]
+CMD ["sh", "-c", "npx drizzle-kit migrate && npm start"]
