@@ -25,8 +25,9 @@ COPY --from=builder /app/db ./db
 COPY --from=builder /app/drizzle.config.json ./drizzle.config.json
 
 ENV NODE_ENV=production
+ENV HOSTNAME="0.0.0.0"
 ENV PORT=3000
 
 EXPOSE 3000
 
-CMD ["sh", "-c", "npm run db:migrate && npm start"]
+CMD ["sh", "-c", "npx drizzle-kit migrate && node_modules/.bin/next start -H 0.0.0.0 -p 3000"]

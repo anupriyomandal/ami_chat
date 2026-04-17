@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "npx drizzle-kit migrate && next start",
+    "start": "next start",
     "lint": "eslint",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "DATABASE_PATH=/data/openchat.db drizzle-kit migrate",
