@@ -10,12 +10,16 @@ export default function LoginPage() {
   const [error, formAction, isPending] = useActionState(loginAction, null);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#f5f5f5] p-4">
+    <div className="min-h-screen flex items-center justify-center bg-[#f7f7f8] p-4">
       <div className="w-full max-w-md">
-        <div className="bg-white border-2 border-[#0a0a23] p-6">
-          <h1 className="text-2xl font-bold text-[#0a0a23] mb-6">Sign In</h1>
+        <div className="flex items-center gap-2 justify-center mb-6">
+          <div className="px-2.5 py-1 rounded-lg bg-[#0a0a23] text-white text-lg font-black tracking-tight">AMI</div>
+          <span className="text-xl font-bold text-[#0a0a23]">Chat</span>
+        </div>
+        <div className="bg-white border border-[#e4e4e7] rounded-2xl p-6 shadow-sm">
+          <h1 className="text-xl font-bold text-[#0a0a23] mb-6">Sign In</h1>
           {error && (
-            <div className="bg-[#dc3545] text-white p-3 mb-4 text-sm">
+            <div className="bg-red-50 text-[#dc3545] border border-red-200 rounded-lg p-3 mb-4 text-sm">
               {error}
             </div>
           )}
@@ -45,5 +49,6 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
+
   );
 }
