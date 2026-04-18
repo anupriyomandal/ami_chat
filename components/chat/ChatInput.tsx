@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Send, Square } from "lucide-react";
-import { Textarea } from "@/components/ui/Textarea";
 import { cn } from "@/lib/utils";
 
 interface ChatInputProps {
@@ -44,40 +43,46 @@ export function ChatInput({ onSend, isStreaming, onStop, disabled }: ChatInputPr
   };
 
   return (
-    <div className="border-t-2 border-[#0a0a23] bg-white p-4">
-      <div className="max-w-3xl mx-auto flex gap-2 items-end">
-        <Textarea
-          ref={textareaRef}
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          onKeyDown={handleKeyDown}
-          placeholder="Type a message..."
-          className="flex-1 min-h-[44px] max-h-[200px]"
-          rows={1}
-          disabled={disabled || isStreaming}
-        />
-        {isStreaming ? (
-          <button
-            onClick={onStop}
-            className="h-[44px] px-4 bg-[#dc3545] text-white border-2 border-[#0a0a23] font-semibold text-sm hover:bg-white hover:text-[#dc3545] transition-colors shrink-0"
-            aria-label="Stop generating"
-          >
-            <Square size={16} />
-          </button>
-        ) : (
-          <button
-            onClick={handleSubmit}
-            disabled={!value.trim() || disabled}
-            className={cn(
-              "h-[44px] px-4 bg-[#0a0a23] text-white border-2 border-[#0a0a23] font-semibold text-sm transition-colors shrink-0",
-              "hover:bg-white hover:text-[#0a0a23]",
-              "disabled:opacity-50 disabled:cursor-not-allowed"
-            )}
-            aria-label="Send message"
-          >
-            <Send size={16} />
-          </button>
-        )}
+    <div className="px-4 py-4 md:px-8">
+      <div className="max-w-3xl mx-auto">
+        <div className="flex items-end gap-2 bg-white rounded-2xl border border-[#e4e4e7] shadow-sm px-4 py-3 focus-within:ring-2 focus-within:ring-[#0a0a23] transition-shadow">
+          <textarea
+            ref={textareaRef}
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="Type a message..."
+            className="flex-1 min-h-[24px] max-h-[200px] resize-none bg-transparent text-sm text-[#0a0a23] placeholder:text-[#a1a1aa] outline-none leading-relaxed"
+            rows={1}
+            disabled={disabled || isStreaming}
+          />
+          {isStreaming ? (
+            <button
+              onClick={onStop}
+              className="h-8 w-8 flex items-center justify-center rounded-lg bg-[#0a0a23] text-white hover:bg-[#1a1a3a] transition-colors shrink-0"
+              aria-label="Stop generating"
+            >
+              <Square size={14} fill="white" />
+            </button>
+          ) : (
+            <button
+              onClick={handleSubmit}
+              disabled={!value.trim() || disabled}
+              className={cn(
+                "h-8 w-8 flex items-center justify-center rounded-lg transition-colors shrink-0",
+                value.trim() && !disabled
+                  ? "bg-[#0a0a23] text-white hover:bg-[#1a1a3a]"
+                  : "bg-[#e4e4e7] text-[#a1a1aa] cursor-not-allowed"
+              )}
+              aria-label="Send message"
+            >
+              <Send size={14} />
+            </button>
+          )}
+        </div>
+        <p className="text-center text-xs text-[#a1a1aa] mt-2">
+          Press Enter to send · Shift+Enter for new line
+        </p>
       </div>
     </div>
   );

@@ -26,25 +26,28 @@ export function ChatThread({ messages, onSend, isStreaming, onStop, disabled }: 
   }, [messages]);
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full bg-[#f7f7f8]">
       <div className="flex-1 overflow-y-auto">
         {messages.length === 0 ? (
           <div className="h-full flex items-center justify-center">
-            <div className="text-center">
-              <h2 className="text-2xl font-black text-[#0a0a23] mb-2">AMIChat</h2>
-              <p className="text-[#6b7280]">Start a conversation with AI</p>
+            <div className="text-center space-y-2">
+              <div className="w-12 h-12 rounded-2xl bg-[#0a0a23] text-white flex items-center justify-center text-xl font-black mx-auto">A</div>
+              <h2 className="text-2xl font-bold text-[#0a0a23]">AMIChat</h2>
+              <p className="text-[#71717a] text-sm">Start a conversation with AI</p>
             </div>
           </div>
         ) : (
           <>
-            {messages.map((msg) => (
-              <ChatMessage
-                key={msg.id}
-                role={msg.role}
-                content={msg.content}
-                isStreaming={isStreaming && msg === messages[messages.length - 1] && msg.role === "assistant"}
-              />
-            ))}
+            <div className="pt-6 pb-2">
+              {messages.map((msg) => (
+                <ChatMessage
+                  key={msg.id}
+                  role={msg.role}
+                  content={msg.content}
+                  isStreaming={isStreaming && msg === messages[messages.length - 1] && msg.role === "assistant"}
+                />
+              ))}
+            </div>
             <div ref={bottomRef} />
           </>
         )}

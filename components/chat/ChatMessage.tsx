@@ -16,30 +16,36 @@ export function ChatMessage({ role, content, isStreaming }: ChatMessageProps) {
 
   const isUser = role === "user";
 
+  if (isUser) {
+    return (
+      <div className="py-3 px-4 md:px-8 flex justify-end">
+        <div className="max-w-[75%] md:max-w-[60%] bg-[#0a0a23] text-white rounded-2xl rounded-br-sm px-4 py-3 text-sm leading-relaxed">
+          {content}
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className={cn("py-4 px-4 md:px-8", isUser ? "bg-[#f5f5f5]" : "bg-white")}>
-      <div className="max-w-3xl mx-auto">
-        <div className="flex items-start gap-3">
-          <div
-            className={cn(
-              "w-8 h-8 border-2 border-[#0a0a23] flex items-center justify-center text-sm font-bold shrink-0",
-              isUser ? "bg-[#0a0a23] text-white" : "bg-white text-[#0a0a23]"
-            )}
-          >
-            {isUser ? "U" : "A"}
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="text-sm font-semibold mb-1">{isUser ? "You" : "Assistant"}</div>
-            <div className="prose prose-sm max-w-none prose-pre:border-2 prose-pre:border-[#0a0a23] prose-pre:bg-[#f5f5f5] prose-code:bg-[#f5f5f5] prose-code:px-1 prose-code:py-0.5 prose-code:border prose-code:border-[#0a0a23] prose-code:text-sm">
-              <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]}>
-                {content}
-              </ReactMarkdown>
-              {isStreaming && <span className="inline-block w-2 h-4 bg-[#0a0a23] animate-pulse ml-1" />}
-            </div>
-            {!isUser && content && !isStreaming && (
-              <CopyButton text={content} />
+    <div className="py-3 px-4 md:px-8">
+      <div className="max-w-3xl mx-auto flex items-start gap-3">
+        <div className="w-7 h-7 rounded-full bg-[#0a0a23] text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
+          A
+        </div>
+        <div className="flex-1 min-w-0 pt-0.5">
+          <div className="prose prose-sm max-w-none
+            prose-pre:rounded-xl prose-pre:border prose-pre:border-[#e4e4e7] prose-pre:bg-[#f4f4f5]
+            prose-code:bg-[#f4f4f5] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md
+            prose-code:border prose-code:border-[#e4e4e7] prose-code:text-sm
+            prose-p:text-[#0a0a23] prose-headings:text-[#0a0a23]">
+            <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]}>
+              {content}
+            </ReactMarkdown>
+            {isStreaming && (
+              <span className="inline-block w-2 h-4 bg-[#0a0a23] rounded-sm animate-pulse ml-1" />
             )}
           </div>
+          {!isStreaming && content && <CopyButton text={content} />}
         </div>
       </div>
     </div>
@@ -58,7 +64,7 @@ function CopyButton({ text }: { text: string }) {
   return (
     <button
       onClick={handleCopy}
-      className="mt-2 flex items-center gap-1 text-xs text-[#6b7280] hover:text-[#0a0a23] transition-colors"
+      className="mt-2 flex items-center gap-1.5 text-xs text-[#71717a] hover:text-[#0a0a23] transition-colors rounded-md px-2 py-1 hover:bg-[#f4f4f5]"
     >
       {copied ? <Check size={12} /> : <Copy size={12} />}
       {copied ? "Copied" : "Copy"}
