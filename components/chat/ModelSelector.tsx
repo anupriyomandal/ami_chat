@@ -35,7 +35,7 @@ export function ModelSelector({ value, onChange }: ModelSelectorProps) {
 
   if (loading) {
     return (
-      <div className="h-8 w-40 bg-[#f5f5f5] border-2 border-[#0a0a23]" />
+      <div className="h-8 w-36 rounded-lg bg-[#f4f4f5] animate-pulse" />
     );
   }
 
@@ -43,7 +43,7 @@ export function ModelSelector({ value, onChange }: ModelSelectorProps) {
     <select
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="border-2 border-[#0a0a23] px-3 py-1.5 bg-white text-sm font-semibold cursor-pointer hover:bg-[#f5f5f5] focus:outline-none focus:ring-2 focus:ring-[#0a0a23] focus:ring-offset-2"
+      className="border border-[#e4e4e7] rounded-lg px-3 py-1.5 bg-white text-sm font-medium cursor-pointer hover:border-[#a1a1aa] focus:outline-none transition-colors"
     >
       {models.map((model) => (
         <option key={model.id} value={model.id}>
