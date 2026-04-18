@@ -45,7 +45,7 @@ export function ChatInput({ onSend, isStreaming, onStop, disabled }: ChatInputPr
   return (
     <div className="px-4 py-4 md:px-8">
       <div className="max-w-3xl mx-auto">
-        <div className="flex items-end gap-2 bg-white rounded-2xl border border-[#e4e4e7] shadow-sm px-4 py-3 focus-within:ring-2 focus-within:ring-[#0a0a23] transition-shadow">
+        <div className="flex items-end gap-2 bg-white rounded-2xl border border-[#e4e4e7] shadow-sm px-4 py-3 focus-within:border-[#a1a1aa] transition-colors">
           <textarea
             ref={textareaRef}
             value={value}
