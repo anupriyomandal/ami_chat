@@ -58,11 +58,16 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "No API key configured" }, { status: 500 });
   }
 
-  const openRouterResponse = await streamChatCompletion({
-    messages: chatMessages,
-    model,
-    apiKey,
-  });
+  let openRouterResponse: Response;
+  try {
+    openRouterResponse = await streamChatCompletion({
+      messages: chatMessages,
+      model,
+      apiKey,
+    });
+  } catch (e: any) {
+    return NextResponse.json({ error: e.message ?? "OpenRouter request failed" }, { status: 502 });
+  }
 
   const reader = openRouterResponse.body?.getReader();
   if (!reader) {

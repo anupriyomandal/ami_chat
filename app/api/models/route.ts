@@ -37,34 +37,26 @@ export async function GET() {
     } catch {}
   }
 
-  let allModels: { id: string; name: string }[] = [];
+  // Try to get prettier names from OpenRouter, but always show all DB models
+  let orNames: Record<string, string> = {};
   try {
     if (apiKey) {
-      allModels = await fetchModels(apiKey);
+      const orModels = await fetchModels(apiKey);
+      for (const m of orModels) orNames[m.id] = m.name;
     }
   } catch {}
 
-  // If we couldn't fetch from OpenRouter, use display names from DB directly
-  if (allModels.length === 0 && enabled.length > 0) {
-    return NextResponse.json(
-      enabled.map((m) => ({ id: m.modelId, name: m.displayName }))
-    );
+  const result = enabled.map((m) => ({
+    id: m.modelId,
+    name: orNames[m.modelId] ?? m.displayName,
+  }));
+
+  if (result.length === 0) {
+    result.push({ id: "openai/gpt-4o-mini", name: "GPT-4o Mini" });
   }
 
-  const filtered = allModels
-    .filter((m) => enabledIds.has(m.id))
-    .map((m) => ({ id: m.id, name: m.name }));
-
-  if (filtered.length === 0) {
-    filtered.push(...enabled.map((m) => ({ id: m.modelId, name: m.displayName })));
-  }
-
-  if (filtered.length === 0) {
-    filtered.push({ id: "openai/gpt-4o-mini", name: "GPT-4o Mini" });
-  }
-
-  cachedModels = filtered;
+  cachedModels = result;
   cacheExpiry = now + 60 * 60 * 1000;
 
-  return NextResponse.json(filtered);
+  return NextResponse.json(result);
 }
