@@ -28,6 +28,7 @@ COPY --from=builder /app/scripts ./scripts
 COPY --from=builder /app/next.config.ts ./next.config.ts
 COPY --from=builder /app/drizzle.config.ts ./drizzle.config.ts
 COPY --from=builder /app/tsconfig.json ./tsconfig.json
+COPY --from=builder /app/instrumentation.ts ./instrumentation.ts
 
 ENV NODE_ENV=production
 ENV HOSTNAME=0.0.0.0
