@@ -31,8 +31,10 @@ export function ChatThread({ messages, onSend, isStreaming, onStop, disabled }: 
         {messages.length === 0 ? (
           <div className="h-full flex items-center justify-center">
             <div className="text-center space-y-2">
-              <div className="w-12 h-12 rounded-2xl bg-[#0a0a23] text-white flex items-center justify-center text-xl font-black mx-auto">A</div>
-              <h2 className="text-2xl font-bold text-[#0a0a23]">AMIChat</h2>
+              <div className="flex items-center gap-2 justify-center">
+                <div className="px-3 py-1.5 rounded-xl bg-[#0a0a23] text-white text-xl font-black tracking-tight">AMI</div>
+                <span className="text-2xl font-bold text-[#0a0a23]">Chat</span>
+              </div>
               <p className="text-[#71717a] text-sm">Start a conversation with AI</p>
             </div>
           </div>

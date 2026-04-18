@@ -101,9 +101,9 @@ export function Sidebar({ user }: SidebarProps) {
       >
         {/* Header */}
         <div className="px-4 py-5">
-          <Link href="/chat" className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-[#0a0a23] text-white flex items-center justify-center text-xs font-black">A</div>
-            <span className="text-base font-bold tracking-tight text-[#0a0a23]">AMIChat</span>
+          <Link href="/chat" className="flex items-center gap-2">
+            <div className="px-2 py-1 rounded-lg bg-[#0a0a23] text-white text-sm font-black tracking-tight">AMI</div>
+            <span className="text-base font-bold tracking-tight text-[#0a0a23]">Chat</span>
           </Link>
         </div>
 
