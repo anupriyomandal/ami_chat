@@ -25,4 +25,17 @@ export async function register() {
   console.log("[startup] Migrations complete.");
 
   sqlite.close();
+
+  // Seed new models (idempotent — onConflictDoNothing)
+  console.log("[startup] Seeding models...");
+  const { execSync } = await import("child_process");
+  try {
+    execSync(`node_modules/.bin/tsx scripts/seed-models.ts`, {
+      cwd: process.cwd(),
+      env: { ...process.env },
+      stdio: "inherit",
+    });
+  } catch (e) {
+    console.error("[startup] Seed failed:", e);
+  }
 }

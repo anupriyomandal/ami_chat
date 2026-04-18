@@ -13,6 +13,8 @@ const defaultModels = [
   { modelId: "mistralai/mistral-large", displayName: "Mistral Large" },
   { modelId: "qwen/qwen-2.5-72b-instruct", displayName: "Qwen 2.5 72B" },
   { modelId: "cohere/command-r-plus", displayName: "Command R+" },
+  { modelId: "minimax/minimax-m1:free", displayName: "MiniMax M1 2.5 (Free)" },
+  { modelId: "nvidia/llama-3.3-nemotron-super-49b-v1:free", displayName: "Nemotron Super 49B (Free)" },
 ];
 
 async function seed() {
