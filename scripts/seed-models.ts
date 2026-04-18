@@ -14,7 +14,10 @@ const defaultModels = [
   { modelId: "qwen/qwen-2.5-72b-instruct", displayName: "Qwen 2.5 72B" },
   { modelId: "cohere/command-r-plus", displayName: "Command R+" },
   { modelId: "minimax/minimax-m1:free", displayName: "MiniMax M1 2.5 (Free)" },
+  { modelId: "minimax/minimax-m2.5:free", displayName: "MiniMax M2.5 (Free)" },
   { modelId: "nvidia/llama-3.3-nemotron-super-49b-v1:free", displayName: "Nemotron Super 49B (Free)" },
+  { modelId: "nvidia/nemotron-3-super-120b-a12b:free", displayName: "Nemotron 3 Super 120B (Free)" },
+  { modelId: "google/gemma-4-31b-it:free", displayName: "Gemma 4 31B (Free)" },
 ];
 
 async function seed() {
