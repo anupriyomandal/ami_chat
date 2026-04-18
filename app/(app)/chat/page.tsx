@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { ChatThread } from "@/components/chat/ChatThread";
 import { ModelSelector } from "@/components/chat/ModelSelector";
 import { toast } from "sonner";
@@ -18,7 +17,6 @@ export default function ChatPage() {
   const [model, setModel] = useState("openai/gpt-4o-mini");
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [controller, setController] = useState<AbortController | null>(null);
-  const router = useRouter();
 
   const handleSend = async (content: string) => {
     let convId = conversationId;
@@ -101,8 +99,8 @@ export default function ChatPage() {
     } finally {
       setIsStreaming(false);
       setController(null);
-      // Navigate to the conversation page now that streaming is done
-      if (convId) router.replace(`/chat/${convId}`);
+      // Silently update the URL without a full navigation/remount
+      if (convId) window.history.replaceState(null, "", `/chat/${convId}`);
     }
   };
 
