@@ -3,7 +3,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { ChatThread } from "@/components/chat/ChatThread";
-import { ModelSelector } from "@/components/chat/ModelSelector";
 import { toast } from "sonner";
 
 interface Message {
@@ -17,7 +16,7 @@ export default function ChatIdPage() {
   const id = params.id as string;
   const [messages, setMessages] = useState<Message[]>([]);
   const [isStreaming, setIsStreaming] = useState(false);
-  const [model, setModel] = useState("openai/gpt-4o-mini");
+  const model = "openai/gpt-4o-mini";
   const [loading, setLoading] = useState(true);
   const [controller, setController] = useState<AbortController | null>(null);
   const router = useRouter();
@@ -27,7 +26,6 @@ export default function ChatIdPage() {
       .then((r) => r.json())
       .then((data) => {
         if (data.conversation) {
-          setModel(data.conversation.model || "openai/gpt-4o-mini");
           setMessages(data.messages || []);
         }
         setLoading(false);
@@ -125,9 +123,6 @@ export default function ChatIdPage() {
 
   return (
     <div className="h-full flex flex-col">
-      <div className="border-b border-[#e4e4e7] bg-white px-4 py-2 flex items-center">
-        <ModelSelector value={model} onChange={setModel} />
-      </div>
       <ChatThread
         messages={messages}
         onSend={handleSend}

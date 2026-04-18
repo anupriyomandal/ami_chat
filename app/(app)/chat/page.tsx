@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { ChatThread } from "@/components/chat/ChatThread";
-import { ModelSelector } from "@/components/chat/ModelSelector";
 import { toast } from "sonner";
 
 interface Message {
@@ -14,7 +13,7 @@ interface Message {
 export default function ChatPage() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isStreaming, setIsStreaming] = useState(false);
-  const [model, setModel] = useState("openai/gpt-4o-mini");
+  const model = "openai/gpt-4o-mini";
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [controller, setController] = useState<AbortController | null>(null);
 
@@ -110,9 +109,6 @@ export default function ChatPage() {
 
   return (
     <div className="h-full flex flex-col">
-      <div className="border-b border-[#e4e4e7] bg-white px-4 py-2 flex items-center">
-        <ModelSelector value={model} onChange={setModel} />
-      </div>
       <ChatThread
         messages={messages}
         onSend={handleSend}
